@@ -2,8 +2,8 @@ param (
     [string]$RunwayEmail,
     [string]$RunwayPassword
 )
-Write-Host 'Installing PsRunway module...'
-Install-Module PsRunway -Repository PSGallery -Force
+Write-Host 'Importing PsRunway module...'
+Import-Module PsRunway
 
 Write-Host 'Authenticating to the Runway API...'
 $s = Invoke-RwLoginAuthentication -Email $RunwayEmail -Password $RunwayPassword -Remember
@@ -31,12 +31,12 @@ foreach ($job in $jobDef) {
     }
     # Assign Endpoints
     foreach ($runner in $job.RunnerNames) {
-        $existingRunner = $existingRunners | Where-Object {$_.Name -eq $runner}
+        $existingRunner = $existingRunners | Where-Object {$_.AssetName -eq $runner}
         if ($null -ne $existingRunner) {
             Write-Host "- Assigning runner '$runner' to the job..."
             Add-RwSetToSet -TargetSetId $existingJob.EndpointSetId -ObjectIds $existingRunner.Id
         } else {
-            Write-Host "Unable to find runner with name: '$runner'"
+            Write-Host "# Unable to find runner with name: '$runner'"
         }
     }
 
@@ -54,7 +54,7 @@ foreach ($job in $jobDef) {
                         ConnectionId = $existingConnection.Id
                     }    
                 } else {
-                    Write-Host "Unable to find connection with name: '$($action.ConnectionName)'"
+                    Write-Host "# Unable to find connection with name: '$($action.ConnectionName)'"
                 }
             } else {
                 [Runway.PowerShell.Models.IActionSettingRequest]@{
@@ -62,7 +62,7 @@ foreach ($job in $jobDef) {
                 }
             }
         } else {
-            Write-Host "Unable to find action with name: '$($action.Name)'"
+            Write-Host "# Unable to find action with name: '$($action.Name)'"
         }
     }
     Write-Host "- Applying the new action chain..."
@@ -72,7 +72,7 @@ foreach ($job in $jobDef) {
 
     # Assign Schedule
     Write-Host "- Assigning the new schedule"
-    Set-RwJobSchedule -JobId $existingJob.Id -Schedule [Runway.PowerShell.Models.IJobSchedule]@{
+    Set-RwJobSchedule -JobId $existingJob.Id -OutFile .\out.txt -Schedule [Runway.PowerShell.Models.IJobSchedule]@{
         ScheduleType = $job.Schedule.Type
         RepeatMinutes = $job.Schedule.RepeateMinutes
         Weekdays = $job.Schedule.Weekdays
