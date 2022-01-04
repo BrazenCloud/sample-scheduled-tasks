@@ -24,7 +24,7 @@ jobs:
 
       - name: Download any executables
         shell: pwsh
-        run: ./replaceExecutables.ps1
+        run: ./repoScripts/replaceExecutables.ps1
 
       - name: Auth to Runway
         run: |
