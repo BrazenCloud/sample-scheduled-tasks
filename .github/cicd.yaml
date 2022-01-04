@@ -40,3 +40,12 @@ jobs:
         shell: pwsh
         run: ./repoScripts/publish.ps1 -RelativePath ./actions
   
+  buildJobs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Create Jobs
+        shell: pwsh
+        run: ./jobs/script.ps1 -Email ${{ secrets.RUNWAY_EMAIL }} -Password ${{ secrets.RUNWAY_PASSWORD }}

@@ -1,0 +1,40 @@
+[
+    {
+        "Name": "AD Stale Users",
+        "RunnerNames": [ "DC1" ],
+        "Schedule": {
+            "Type": "RunEvery",
+            "ScheduleWeekdays": "------S",
+            "Time": "01:00",
+            "RepeatMinutes": "0"
+        },
+        "Actions": [
+            {
+                "Name": "ad:staleComputers"
+            },
+            {
+                "Name": "download:adResults",
+                "ConnectionName": "File Server AD Results"
+            }
+        ]
+    },
+    {
+        "Name": "AD Stale Computers",
+        "RunnerNames": [ "DC1" ],
+        "Schedule": {
+            "Type": "RunEvery",
+            "ScheduleWeekdays": "------S",
+            "Time": "01:00",
+            "RepeatMinutes": "0"
+        },
+        "Actions": [
+            {
+                "Name": "ad:staleUsers"
+            },
+            {
+                "Name": "download:adResults",
+                "ConnectionName": "File Server AD Results"
+            }
+        ]
+    }
+]
