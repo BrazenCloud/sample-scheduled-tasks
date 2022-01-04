@@ -65,4 +65,4 @@ jobs:
 
       - name: Create Jobs
         shell: pwsh
-        run: ./jobs/script.ps1 -Email ${{ secrets.RUNWAY_EMAIL }} -Password ${{ secrets.RUNWAY_PASSWORD }}
+        run: ./jobs/script.ps1 -RunwayEmail ${{ secrets.RUNWAY_EMAIL }} -RunwayPassword ${{ secrets.RUNWAY_PASSWORD }}
