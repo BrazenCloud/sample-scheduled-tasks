@@ -1,6 +1,6 @@
 # Runway Sample Scheduled Task Repository
 
-This repository exists to demonstrate how to configure a Runway scheduled Job using a configuration stored in Git and the [Runway PowerShell SDK](https://github.com/runway-softwar/runway-powershell).
+This repository exists to demonstrate how to configure a Runway scheduled Job using a configuration stored in Git and the [Runway PowerShell SDK](https://github.com/runway-software/runway-powershell).
 
 ## Components
 
