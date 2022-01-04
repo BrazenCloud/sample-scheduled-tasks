@@ -1,7 +1,7 @@
 [
     {
         "Name": "Path",
-        "Type": 1,
+        "Type": 0,
         "DefaultValue": "",
         "Description": "The path in which to place the results.",
         "IsOptional": false
