@@ -3,7 +3,7 @@ param (
     [string]$RunwayPassword
 )
 Write-Host 'Importing PsRunway module...'
-Import-Module PsRunway
+#Import-Module PsRunway
 
 Write-Host 'Authenticating to the Runway API...'
 $s = Invoke-RwLoginAuthentication -Email $RunwayEmail -Password $RunwayPassword -Remember
