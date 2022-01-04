@@ -66,13 +66,13 @@ foreach ($job in $jobDef) {
         }
     }
     Write-Host "- Applying the new action chain..."
-    Set-RwJobAction -JobId $existingJob.Id -Request @(
+    Set-RwJobAction -JobId $existingJob.Id -OutFile .\jobAction.txt -Request @(
         $actions
     )
 
     # Assign Schedule
     Write-Host "- Assigning the new schedule"
-    Set-RwJobSchedule -JobId $existingJob.Id -OutFile .\out.txt -Schedule [Runway.PowerShell.Models.IJobSchedule]@{
+    Set-RwJobSchedule -JobId $existingJob.Id -OutFile .\jobSchedule.txt -Schedule [Runway.PowerShell.Models.IJobSchedule]@{
         ScheduleType = $job.Schedule.Type
         RepeatMinutes = $job.Schedule.RepeateMinutes
         Weekdays = $job.Schedule.Weekdays
