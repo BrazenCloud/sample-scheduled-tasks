@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  buildActions:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download runway.bin
+        run: |
+          wget https://runwaydownloads.blob.core.windows.net/appdl/runway.bin
+          chmod +x ./runway.bin
+
+      - name: Download any executables
+        shell: pwsh
+        run: ./replaceExecutables.ps1
+
+      - name: Auth to Runway
+        run: |
+          ./runway.bin login -u ${{ secrets.RUNWAY_EMAIL }} -p ${{ secrets.RUNWAY_PASSWORD }}
+
+      - name: Build Each Action on PR
+        if: ${{ github.event_name == 'pull_request' }}
+        shell: pwsh
+        run: ./repoScripts/publish.ps1 -Test -RelativePath ./actions
+      
+      - name: Publish Each Action on Push
+        if: ${{ github.event_name == 'push' }}
+        shell: pwsh
+        run: ./repoScripts/publish.ps1 -RelativePath ./actions
+  
