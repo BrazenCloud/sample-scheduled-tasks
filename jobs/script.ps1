@@ -6,7 +6,7 @@ Write-Host 'Installing PsRunway module...'
 Install-Module PsRunway -Repository PSGallery -Force
 
 Write-Host 'Authenticating to the Runway API...'
-$s = Invoke-RwAuthentication -Email $RunwayEmail -Password $RunwayPassword -Remember
+$s = Invoke-RwLoginAuthentication -Email $RunwayEmail -Password $RunwayPassword -Remember
 $env:RunwaySessionToken = $s.Session
 
 Write-Host 'Loading existing resources from the Runway API...'
