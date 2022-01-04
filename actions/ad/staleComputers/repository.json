@@ -1,0 +1,5 @@
+{
+	"Description": "Clean up stale computers in AD.",
+	"Language": "PowerShell",
+	"Tags": ["Windows","ActiveDirectory"]
+}

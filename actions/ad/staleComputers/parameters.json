@@ -1,0 +1,23 @@
+[
+    {
+        "Name": "Last logon",
+        "Type": 1,
+        "DefaultValue": "90",
+        "Description": "The numbers of days since last login to consider computers stale.",
+        "IsOptional": true
+    },
+    {
+        "Name": "Created Before",
+        "Type": 1,
+        "DefaultValue": "14",
+        "Description": "Only consider accounts created at least this many days ago.",
+        "IsOptional": true
+    },
+    {
+        "Name": "Disabled OU",
+        "Type": 0,
+        "DefaultValue": "TBD",
+        "Description": "OU to moved stale computers to.",
+        "IsOptional": true
+    }
+]
