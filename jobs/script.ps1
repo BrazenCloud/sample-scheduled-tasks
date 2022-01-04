@@ -74,7 +74,7 @@ foreach ($job in $jobDef) {
     Write-Host "- Assigning the new schedule"
     Set-RwJobSchedule -JobId $existingJob.Id -OutFile .\jobSchedule.txt -Schedule [Runway.PowerShell.Models.IJobSchedule]@{
         ScheduleType = $job.Schedule.Type
-        RepeatMinutes = $job.Schedule.RepeateMinutes
+        RepeatMinutes = $job.Schedule.RepeatMinutes
         Weekdays = $job.Schedule.Weekdays
         Schedule = $job.Schedule.Time
     }

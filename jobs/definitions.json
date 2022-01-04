@@ -4,7 +4,7 @@
         "RunnerNames": [ "DC1" ],
         "Schedule": {
             "Type": "RunEvery",
-            "ScheduleWeekdays": "------S",
+            "Weekdays": "------S",
             "Time": "01:00",
             "RepeatMinutes": "0"
         },
@@ -23,7 +23,7 @@
         "RunnerNames": [ "DC1" ],
         "Schedule": {
             "Type": "RunEvery",
-            "ScheduleWeekdays": "------S",
+            "Weekdays": "------S",
             "Time": "01:00",
             "RepeatMinutes": "0"
         },
