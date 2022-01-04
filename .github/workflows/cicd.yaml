@@ -59,6 +59,7 @@ jobs:
   
   buildJobs:
     runs-on: ubuntu-latest
+    needs: buildActions
 
     steps:
       - uses: actions/checkout@v2
