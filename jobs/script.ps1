@@ -71,11 +71,21 @@ foreach ($job in $jobDef) {
     )
 
     # Assign Schedule
+    # There is a bug in PsRunway that requires this weird usage of Set-RwJobSchedule
     Write-Host "- Assigning the new schedule"
-    Set-RwJobSchedule -JobId $existingJob.Id -OutFile .\jobSchedule.txt -Schedule [Runway.PowerShell.Models.IJobSchedule]@{
+    $schedule = [Runway.PowerShell.Models.IJobSchedule]@{
         ScheduleType = $job.Schedule.Type
         RepeatMinutes = $job.Schedule.RepeatMinutes
         Weekdays = $job.Schedule.Weekdays
         Schedule = $job.Schedule.Time
     }
+    $scheduleSplat = @{
+        JobId = $existingJob.Id
+        OutFile = '\jobSchedule.txt'
+        Schedule = $schedule
+        RepeatMinutes = $job.Schedule.RepeatMinutes
+        ScheduleType = $job.Schedule.Type
+        Weekdays = $job.Schedule.Weekdays
+    }
+    Set-RwJobSchedule @scheduleSplat
 }
