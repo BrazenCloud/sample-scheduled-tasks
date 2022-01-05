@@ -34,7 +34,7 @@ foreach ($job in $jobDef) {
         $existingRunner = $existingRunners | Where-Object {$_.AssetName -eq $runner}
         if ($null -ne $existingRunner) {
             Write-Host "- Assigning runner '$runner' to the job..."
-            Add-RwSetToSet -TargetSetId $existingJob.EndpointSetId -ObjectIds $existingRunner.Id
+            Add-RwSetToSet -TargetSetId $existingJob.EndpointSetId -ObjectIds $existingRunner.AssetId
         } else {
             Write-Host "# Unable to find runner with name: '$runner'"
         }
