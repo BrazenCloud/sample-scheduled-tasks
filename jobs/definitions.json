@@ -1,6 +1,6 @@
 [
     {
-        "Name": "AD Stale Users",
+        "Name": "AD Stale Computers",
         "RunnerNames": [ "DC1" ],
         "Schedule": {
             "Type": "RunEvery",
@@ -19,7 +19,7 @@
         ]
     },
     {
-        "Name": "AD Stale Computers",
+        "Name": "AD Stale Users",
         "RunnerNames": [ "DC1" ],
         "Schedule": {
             "Type": "RunEvery",
