@@ -24,10 +24,10 @@ foreach ($job in $jobDef) {
         # Create Job
         Write-Host "- The job does not exist, creating..."
         $newJob = New-RwJob -Name $job.Name -IsEnabled:$true -IsHidden:$false
-        $existingJob = Import-RwJob -Id $newJob.JobId
+        $existingJob = Import-RwJob -JobId $newJob.JobId
     } else {
         Write-Host "- The job already exists, updating existing..."
-        $existingJob = Import-RwJob -Id ($existingJobs | Where-Object {$_.Name -eq $job.Name}).Id
+        $existingJob = Import-RwJob -JobId ($existingJobs | Where-Object {$_.Name -eq $job.Name}).Id
     }
     # Assign Endpoints
     foreach ($runner in $job.RunnerNames) {
