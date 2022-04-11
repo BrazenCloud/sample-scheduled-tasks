@@ -6,8 +6,7 @@ Write-Host 'Importing PsRunway module...'
 #Import-Module PsRunway
 
 Write-Host 'Authenticating to the Runway API...'
-$s = Invoke-RwLoginAuthentication -Email $RunwayEmail -Password $RunwayPassword -Remember
-$env:RunwaySessionToken = $s.Session
+Connect-Runway -Email $RunwayEmail -Password $RunwayPassword
 
 Write-Host 'Loading existing resources from the Runway API...'
 $existingActions = (Get-RwRepository).Items
@@ -24,10 +23,10 @@ foreach ($job in $jobDef) {
         # Create Job
         Write-Host "- The job does not exist, creating..."
         $newJob = New-RwJob -Name $job.Name -IsEnabled:$true -IsHidden:$false
-        $existingJob = Import-RwJob -JobId $newJob.JobId
+        $existingJob = Get-RwJob -JobId $newJob.JobId
     } else {
         Write-Host "- The job already exists, updating existing..."
-        $existingJob = Import-RwJob -JobId ($existingJobs | Where-Object {$_.Name -eq $job.Name}).Id
+        $existingJob = Get-RwJob -JobId ($existingJobs | Where-Object {$_.Name -eq $job.Name}).Id
     }
     # Assign Endpoints
     foreach ($runner in $job.RunnerNames) {
@@ -72,6 +71,7 @@ foreach ($job in $jobDef) {
 
     # Assign Schedule
     # There is a bug in PsRunway that requires this weird usage of Set-RwJobSchedule
+    # Will be fixed in 0.2.0
     Write-Host "- Assigning the new schedule"
     $schedule = [Runway.PowerShell.Models.IJobSchedule]@{
         ScheduleType = $job.Schedule.Type
