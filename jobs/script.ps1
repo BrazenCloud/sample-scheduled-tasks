@@ -6,7 +6,7 @@ Write-Host 'Importing PsRunway module...'
 #Import-Module PsRunway
 
 Write-Host 'Authenticating to the Runway API...'
-Connect-Runway -Email $RunwayEmail -Password $RunwayPassword
+Connect-Runway -Email $RunwayEmail -Password (ConvertTo-SecureString $RunwayPassword -AsPlainText -Force)
 
 Write-Host 'Loading existing resources from the Runway API...'
 $existingActions = (Get-RwRepository).Items
