@@ -5,7 +5,7 @@ connectors:
     runner:
       name: DC1
     parameters:
-      "File Path": "D:\share\reports"
+      "File Path": "D:\\share\\reports"
       Unzip: true
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
       - name: ad:staleComputers
       - name: download:file
         parameters:
-          "File Path": "D:\share\reports"
+          "File Path": "D:\\share\\reports"
           Unzip: true
   "AD Stale Users":
     runners:
@@ -37,5 +37,5 @@ jobs:
       - name: ad:staleUsers
       - name: download:file
         parameters:
-          "File Path": "D:\share\reports"
+          "File Path": "D:\\share\\reports"
           Unzip: true
