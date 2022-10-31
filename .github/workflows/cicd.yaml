@@ -24,7 +24,7 @@ jobs:
 
       - name: Auth to BrazenCloud
         run: |
-          ./runway.bin -S portal.brazencloud.com login -u ${{ secrets.BRAZENCLOUD_EMAIL }} -p ${{ secrets.BARZENCLOUD_PASSWORD }}
+          ./runway.bin -S portal.brazencloud.com login -u ${{ secrets.BRAZENCLOUD_EMAIL }} -p ${{ secrets.BRAZENCLOUD_PASSWORD }}
 
       - name: Build Each Action on PR
         if: ${{ github.event_name == 'pull_request' }}
