@@ -1,5 +1,5 @@
 connectors:
-  "File Server"
+  "File Server":
     action:
       name: download:file
     runner:
