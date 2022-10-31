@@ -41,22 +41,10 @@ jobs:
     needs: buildActions
 
     steps:
-      - name: Create variables for module cacher
-        id: psmodulecache
-        uses: potatoqualitee/psmodulecache@v5.1
-        with:
-          modules-to-cache: BrazenCloud,BrazenCloud.YAML
-
-      - name: Run module cacher action
-        id: cacher
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.psmodulecache.outputs.modulepath }}
-          key: ${{ steps.psmodulecache.outputs.keygen }}
-
-      - name: Install PowerShell modules
-        if: steps.cacher.outputs.cache-hit != 'true'
-        uses: potatoqualitee/psmodulecache@v5.1
+      - name: Install and cache PowerShell modules
+      uses: potatoqualitee/psmodulecache@v5.1
+      with:
+        modules-to-cache: BrazenCloud,BrazenCloud.YAML
       
       - uses: actions/checkout@v2
 
