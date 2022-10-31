@@ -1,0 +1,41 @@
+connectors:
+  "File Server":
+    action:
+      name: download:file
+    runner:
+      name: DC1
+    parameters:
+      "File Path": "D:\\share\\reports"
+      Unzip: true
+
+jobs:
+  "AD Stale Computers":
+    runners:
+      names:
+        DC1
+    schedule:
+      type: RunEvery
+      weekdays: ------S
+      time: "01:00"
+      repeatMinutes: 0
+    actions:
+      - name: ad:staleComputers
+      - name: download:file
+        parameters:
+          "File Path": "D:\\share\\reports"
+          Unzip: true
+  "AD Stale Users":
+    runners:
+      names:
+        DC1
+    schedule:
+      type: RunEvery
+      weekdays: ------S
+      time: "01:00"
+      repeatMinutes: 0
+    actions:
+      - name: ad:staleUsers
+      - name: download:file
+        parameters:
+          "File Path": "D:\\share\\reports"
+          Unzip: true

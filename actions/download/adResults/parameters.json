@@ -1,9 +1,0 @@
-[
-    {
-        "Name": "Path",
-        "Type": 0,
-        "DefaultValue": "",
-        "Description": "The path in which to place the results.",
-        "IsOptional": false
-    }
-]

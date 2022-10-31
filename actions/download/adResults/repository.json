@@ -1,5 +1,0 @@
-{
-	"Description": "Download results from an AD Action.",
-	"Language": "PowerShell",
-	"Tags": ["Windows","ActiveDirectory"]
-}

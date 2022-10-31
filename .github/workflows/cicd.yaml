@@ -22,10 +22,6 @@ jobs:
           wget https://runwaydownloads.blob.core.windows.net/appdl/runway.bin
           chmod +x ./runway.bin
 
-      - name: Download any executables
-        shell: pwsh
-        run: ./repoScripts/replaceExecutables.ps1
-
       - name: Auth to Runway
         run: |
           ./runway.bin login -u ${{ secrets.RUNWAY_EMAIL }} -p ${{ secrets.RUNWAY_PASSWORD }}
@@ -45,25 +41,13 @@ jobs:
     needs: buildActions
 
     steps:
-      - name: Create variables for module cacher
-        id: psmodulecache
-        uses: potatoqualitee/psmodulecache@v3.5
+      - name: Install and cache PowerShell modules
+        uses: potatoqualitee/psmodulecache@v5.1
         with:
-          modules-to-cache: PsRunway
-
-      - name: Run module cacher action
-        id: cacher
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.psmodulecache.outputs.modulepath }}
-          key: ${{ steps.psmodulecache.outputs.keygen }}
-
-      - name: Install PowerShell modules
-        if: steps.cacher.outputs.cache-hit != 'true'
-        uses: potatoqualitee/psmodulecache@v3.5
+          modules-to-cache: BrazenCloud,BrazenCloud.YAML
       
       - uses: actions/checkout@v2
 
       - name: Create Jobs
         shell: pwsh
-        run: ./jobs/script.ps1 -RunwayEmail ${{ secrets.RUNWAY_EMAIL }} -RunwayPassword ${{ secrets.RUNWAY_PASSWORD }}
+        run: ./jobs/script.ps1 -BrazenCloudEmail ${{ secrets.BRAZENCLOUD_EMAIL }} -BrazenCloudPassword ${{ secrets.BRAZENCLOUD_PASSWORD }}
