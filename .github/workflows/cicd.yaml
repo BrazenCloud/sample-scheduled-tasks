@@ -22,9 +22,9 @@ jobs:
           wget https://runwaydownloads.blob.core.windows.net/appdl/runway.bin
           chmod +x ./runway.bin
 
-      - name: Auth to Runway
+      - name: Auth to BrazenCloud
         run: |
-          ./runway.bin login -u ${{ secrets.RUNWAY_EMAIL }} -p ${{ secrets.RUNWAY_PASSWORD }}
+          ./runway.bin -S portal.brazencloud.com login -u ${{ secrets.BRAZENCLOUD_EMAIL }} -p ${{ secrets.BARZENCLOUD_PASSWORD }}
 
       - name: Build Each Action on PR
         if: ${{ github.event_name == 'pull_request' }}
