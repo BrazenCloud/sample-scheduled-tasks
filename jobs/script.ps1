@@ -6,4 +6,4 @@ param (
 Write-Host 'Authenticating to the BrazenCloud API...'
 Connect-BrazenCloud -Email $BrazenCloudEmail -Password (ConvertTo-SecureString $BrazenCloudPassword -AsPlainText -Force) -Domain $BrazenCloudDomain
 
-Sync-BcResourceYaml -PathToYaml .\jobs\definition.yaml -Verbose
+Sync-BcResourceYaml -PathToYaml .\jobs\definitions.yaml -Verbose
